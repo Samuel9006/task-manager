@@ -1,12 +1,12 @@
 package com.taskmanager.taskmanager.controller;
 
+import com.taskmanager.taskmanager.entities.TaskEntity;
 import com.taskmanager.taskmanager.service.ITaskService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.config.Task;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,9 +19,33 @@ public class TaskController {
     private ITaskService taskService;
 
     @GetMapping
-    public String getTask(){
+    public ResponseEntity<?> getTasks(){
         log.info("get tasks service");
-        List<Task> tasks = taskService.getTasks();
-        return "prueba servicio";
+        List<TaskEntity> tasks = taskService.getTasks();
+        return new ResponseEntity<>(tasks, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getTask(@PathVariable Long id){
+        TaskEntity task = taskService.getTaskById(id);
+        return new ResponseEntity<>(task, HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<?> setTask(@RequestBody TaskEntity task){
+        this.taskService.setTask(task);
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateTask(@PathVariable Long idTask){
+        TaskEntity taskEntity = this.taskService.updateTask(this.taskService.getTaskById(idTask));
+        return new ResponseEntity<>(taskEntity, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteTask(@PathVariable Long idTask){
+        this.taskService.deleteTask(idTask);
+        return new ResponseEntity<>("task deleted", HttpStatus.OK);
     }
 }
