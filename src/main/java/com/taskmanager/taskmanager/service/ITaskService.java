@@ -8,7 +8,7 @@ public interface ITaskService {
 
     List<TaskEntity> getTasks();
     TaskEntity getTaskById(Long idTask);
-    void setTask(TaskEntity task);
+    TaskEntity setTask(TaskEntity task);
     TaskEntity updateTask (TaskEntity task);
     void deleteTask (Long idTask);
 }

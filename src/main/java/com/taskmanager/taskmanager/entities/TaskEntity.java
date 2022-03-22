@@ -31,6 +31,9 @@ public class TaskEntity implements Serializable {
     @Column(name="execution_date")
     private Date executionDate;
 
+    @Temporal(TemporalType.DATE)
+    private Date executionHour;
+
     @Column(name="late_date")
     private Integer lateDays;
 

@@ -29,9 +29,9 @@ public class TaskServiceImpl implements ITaskService {
     }
 
     @Override
-    public void setTask(TaskEntity task) {
+    public TaskEntity setTask(TaskEntity task) {
         log.info("The task is setting {}" ,task);
-        this.taskRepository.save(task);
+        return this.taskRepository.save(task);
     }
 
     @Override
