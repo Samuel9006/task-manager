@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = {"*"}, methods = {RequestMethod.DELETE, RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT})
 @Slf4j
-@RequestMapping(value = "task")
+@RequestMapping(value = "api/task")
 public class TaskController {
 
     @Autowired
@@ -38,14 +39,14 @@ public class TaskController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateTask(@PathVariable Long idTask){
-        TaskEntity taskEntity = this.taskService.updateTask(this.taskService.getTaskById(idTask));
+    public ResponseEntity<?> updateTask(@PathVariable Long id){
+        TaskEntity taskEntity = this.taskService.updateTask(this.taskService.getTaskById(id));
         return new ResponseEntity<>(taskEntity, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteTask(@PathVariable Long idTask){
-        this.taskService.deleteTask(idTask);
+    public ResponseEntity<?> deleteTask(@PathVariable Long id){
+        this.taskService.deleteTask(id);
         return new ResponseEntity<>("task deleted", HttpStatus.OK);
     }
 }

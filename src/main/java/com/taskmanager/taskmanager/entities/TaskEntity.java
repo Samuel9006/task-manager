@@ -19,6 +19,7 @@ public class TaskEntity implements Serializable {
     private Long id;
 
     @NotNull
+    @Column(name = "title_task")
     private String title;
     private String description;
 
@@ -30,9 +31,8 @@ public class TaskEntity implements Serializable {
     @Column(name="execution_date")
     private Date executionDate;
 
-    @Temporal(TemporalType.DATE)
     @Column(name="late_date")
-    private Date lateDays;
+    private Integer lateDays;
 
     @NotNull
     @Column(name = "employ_id")
