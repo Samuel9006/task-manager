@@ -2,6 +2,6 @@ package com.taskmanager.taskmanager.enums;
 
 public enum StateEnum {
 
-    REALIZADO,
+    FINALIZADO,
     PENDIENTE
 }
